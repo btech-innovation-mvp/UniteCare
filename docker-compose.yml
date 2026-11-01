@@ -1,0 +1,41 @@
+# ==============================================================================
+# UniteCare — Local Infrastructure (PostgreSQL 16)
+# Usage:
+#   docker compose up -d postgres
+#
+# Note:
+#   Follows strict Non-Negotiable Data Policy:
+#   NO automatic mock-data seeding or fake record insertion.
+# ==============================================================================
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: unitecare_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-unitecare_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-unitecare_secure_local_dev_password}
+      POSTGRES_DB: ${POSTGRES_DB:-unitecare_db}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "${POSTGRES_PORT:-5433}:5432"
+    volumes:
+      - unitecare_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-unitecare_user} -d ${POSTGRES_DB:-unitecare_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - unitecare_network
+
+volumes:
+  unitecare_pgdata:
+    name: unitecare_pgdata
+
+networks:
+  unitecare_network:
+    name: unitecare_network
+    driver: bridge

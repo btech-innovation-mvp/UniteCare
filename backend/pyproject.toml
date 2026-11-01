@@ -1,0 +1,27 @@
+[project]
+name = "unitecare-backend"
+version = "0.1.0"
+description = "Centralized FastAPI backend for UniteCare social-impact platform"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    { name = "UniteCare Team" }
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+pythonpath = ["."]
+filterwarnings = [
+    "ignore:Using `httpx` with `starlette.testclient` is deprecated:DeprecationWarning",
+    "ignore:'HTTP_422_UNPROCESSABLE_ENTITY' is deprecated:DeprecationWarning",
+]

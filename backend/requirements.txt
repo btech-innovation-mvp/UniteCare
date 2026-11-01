@@ -1,0 +1,28 @@
+# ==============================================================================
+# UniteCare — Backend Requirements
+# Strictly necessary packages for FastAPI, PostgreSQL, Auth & Quality foundation
+# ==============================================================================
+
+# Web Framework & Server
+fastapi>=0.115.0
+uvicorn[standard]>=0.32.0
+python-multipart>=0.0.12
+
+# Validation & Settings
+pydantic>=2.9.0
+pydantic-settings>=2.6.0
+email-validator>=2.2.0
+
+# Database & Migrations
+sqlalchemy>=2.0.35
+alembic>=1.13.3
+psycopg[binary]>=3.2.0
+
+# Cryptography & Authentication (Direct bcrypt, no unmaintained passlib)
+bcrypt>=4.2.0
+pyjwt>=2.9.0
+
+# Testing & Quality Gates
+pytest>=8.3.0
+httpx>=0.27.0
+ruff>=0.8.0
